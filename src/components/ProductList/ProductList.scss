@@ -1,0 +1,15 @@
+.productList {
+  padding: 20px;
+  &Content {
+    > ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 20px auto;
+      max-width: 1370px;
+      .failProducts {
+        margin: 0 auto;
+      }
+    }
+  }
+}
