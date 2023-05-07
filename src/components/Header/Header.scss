@@ -19,7 +19,6 @@
       li {
         border: 2px solid rgb(66, 66, 156);
         border-radius: 5px;
-        padding: 12.5px;
         cursor: pointer;
         display: flex;
         justify-content: center;
@@ -39,9 +38,15 @@
           justify-content: center;
           cursor: default;
         }
-        & > svg {
-          width: 28px;
-          height: 28px;
+        & > a {
+          display: flex;
+          padding: 12.5px;
+
+          svg {
+            width: 28px;
+            height: 28px;
+            color: black;
+          }
         }
       }
       .user {
@@ -87,15 +92,14 @@
     }
     .search {
       display: flex;
-      border: 2px solid rgb(66, 66, 156);
-      overflow: hidden;
-      border-radius: 5px;
       align-items: center;
       position: relative;
       & > input {
         padding: 13px 0 14px 40px;
         width: 500px;
-        border: 0;
+        border-radius: 5px;
+
+        border: 2px solid rgb(66, 66, 156);
         font-size: 18px;
         outline: 0;
         &::placeholder {
@@ -120,6 +124,38 @@
         height: 30px;
         left: 8px;
         opacity: 0.4;
+      }
+      & > ul {
+        background: rgb(66, 66, 156);
+        position: absolute;
+        top: 60px;
+        border-radius: 5px;
+        width: 100%;
+        z-index: 5;
+        li {
+          a {
+            color: white;
+            display: flex;
+            padding: 10px;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+            font-size: 20px;
+            width: 100%;
+            &:hover {
+              background: white;
+              color: royalblue;
+              box-shadow: 0 0 10px royalblue;
+              transition: 0.3s;
+            }
+          }
+        }
+      }
+      .closeInputValue {
+        position: absolute;
+        right: 10px;
+        left: auto;
+        cursor: pointer;
       }
     }
   }

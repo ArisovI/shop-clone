@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   AiOutlineMenu,
   AiOutlineSearch,
   AiOutlineShopping,
   AiOutlineHeart,
+  AiOutlineCloseCircle,
 } from "react-icons/ai";
 import MyButton from "../UI/button/MyButton";
 import MyInput from "../UI/input/MyInput";
 import "./Header.scss";
-const Header = () => {
+import { useAppSelector } from "../../hooks/cartHooks";
+
+const Header: React.FC = () => {
   const category: string[] = [
     "Электроника",
     "Бытовая техника",
@@ -28,6 +32,13 @@ const Header = () => {
     "+998905949914",
   ];
 
+  const totalCountCart = useAppSelector((state) => state.cart.carts.length);
+  const totalCountFavorites = useAppSelector(
+    (state) => state.favorite.favorites.length
+  );
+
+  const products = useAppSelector((state) => state.product.products);
+  const [searchValue, setSearchValue] = useState<string>("");
   return (
     <div className="header">
       {
@@ -46,24 +57,61 @@ const Header = () => {
       }
       <div className="headerBottom">
         <div className="headerBottomContent">
-          <a href="#">MLogo</a>
-
+          <Link to="/">MLogo</Link>
           <MyButton>
             <AiOutlineMenu /> <span>Каталог</span>
           </MyButton>
           <div className="search">
             <AiOutlineSearch />
-            <MyInput type="text" placeholder="Искать товары" />
-            <MyButton>Поиск</MyButton>
+            <MyInput
+              type="text"
+              placeholder="Искать товары"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+            />
+            {searchValue.length > 0 ? (
+              <AiOutlineCloseCircle
+                className="closeInputValue"
+                onClick={() => setSearchValue("")}
+              />
+            ) : (
+              ""
+            )}
+            <ul className="searchProducts">
+              {searchValue.length > 1
+                ? products
+                    .filter((obj) => {
+                      if (
+                        obj.name
+                          .toLowerCase()
+                          .includes(searchValue.toLowerCase())
+                      ) {
+                        return true;
+                      } else return false;
+                    })
+                    .map((obj) => (
+                      <li key={obj.id}>
+                        <Link to={`/product/${obj.id}`}>
+                          <span>{obj.name}</span>
+                          <span>{obj.price} $</span>
+                        </Link>
+                      </li>
+                    ))
+                : ""}
+            </ul>
           </div>
           <ul>
             <li>
-              <AiOutlineShopping />
-              <span>0</span>
+              <Link to="/cart">
+                <AiOutlineShopping />
+              </Link>
+              <span>{totalCountCart}</span>
             </li>
             <li>
-              <AiOutlineHeart />
-              <span>0</span>
+              <Link to="/favorite">
+                <AiOutlineHeart />
+              </Link>
+              <span>{totalCountFavorites}</span>
             </li>
             <div className="user">
               <img

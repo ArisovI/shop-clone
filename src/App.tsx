@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import { getProducts } from "./store/productSlice";
 import Product from "./pages/Product";
 import "./App.css";
+import Cart from "./pages/Cart";
+import Favorite from "./pages/Favorite";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +18,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="product/:id" element={<Product />} />
+        <Route path="favorite" element={<Favorite />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<h1>Not found</h1>} />
       </Routes>
     </div>

@@ -1,0 +1,47 @@
+.favoriteItem {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 2px #333;
+  border-radius: 10px;
+  align-items: center;
+  padding: 20px;
+  width: 340px;
+  gap: 10px;
+  justify-content: space-between;
+  img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+  }
+  .title {
+    font-size: 25px;
+    text-align: center;
+  }
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 20px;
+  }
+  .description {
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+    text-align: center;
+  }
+  & > .actions {
+    & > button {
+      border: 0;
+      padding: 0 10px;
+      background: #42429c;
+      color: white;
+      border-radius: 5px;
+      font-size: 18px;
+    }
+    svg {
+      width: 40px;
+      cursor: pointer;
+      fill: #42429c;
+      height: 40px;
+    }
+  }
+}

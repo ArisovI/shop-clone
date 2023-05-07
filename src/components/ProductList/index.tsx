@@ -9,7 +9,7 @@ const ProductList = () => {
       <div className="productListContent">
         <ul>
           {products.length > 0 ? (
-            products.map((obj: any) => <ProductItem key={obj.id} {...obj} />)
+            products.map((obj: any) => <ProductItem key={obj.id} obj={obj} />)
           ) : (
             <h1 className="failProducts">Товары еще не добавлены...</h1>
           )}

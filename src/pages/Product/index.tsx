@@ -3,13 +3,14 @@ import { useLocation, useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import { Link } from "react-router-dom";
 import MyButton from "../../components/UI/button/MyButton";
-import { useAppSelector } from "../../hooks/cartHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/cartHooks";
 import "./Product.scss";
+import { addToCart } from "../../store/cartSlice";
 const Product = () => {
   const products = useAppSelector((state) => state.product.products);
   const { id } = useParams<string>();
   const location = useLocation();
-
+  const dispatch = useAppDispatch();
   if (id !== undefined) {
     const productIndex = products.find((item) => item.id === parseInt(id));
     if (!productIndex) {
@@ -53,7 +54,9 @@ const Product = () => {
               </div>
               <div className="productContentActions">
                 <span className="price">{productIndex.price} $</span>
-                <MyButton>Добавить в корзину</MyButton>
+                <MyButton onClick={() => dispatch(addToCart(productIndex))}>
+                  Добавить в корзину
+                </MyButton>
                 <MyButton>Купить в 1 клик</MyButton>
                 <span className="payment">
                   <span>Рассрочка</span>
